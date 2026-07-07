@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "discod"
+version = "1.0.0"
+description = "DisCOD: annotation-free camouflaged object detection by distilling VLM+SAM2 pseudo-labels with cross-prompt disagreement selection"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "torch>=2.4",
+    "torchvision",
+    "timm>=1.0",
+    "transformers>=4.57.0",
+    "qwen-vl-utils",
+    "numpy",
+    "pillow",
+    "opencv-python",
+    "scipy",
+]
+
+[tool.setuptools.packages.find]
+include = ["discod*"]
+
+# SAM2 (the `sam2` package) is installed separately from
+# https://github.com/facebookresearch/sam2 and is only needed for
+# pseudo-label generation and teacher evaluation, not for student inference.
