@@ -10,8 +10,7 @@ The key ingredient is **cross-prompt box disagreement**: querying the VLM with
 K=5 prompts of distinct reasoning perspectives and measuring how much the
 returned boxes disagree identifies the object-level localization failures that
 dominate pseudo-label noise, so the worst samples can be removed before
-distillation — all without ground truth. At inference time only the student
-runs.
+distillation. Only the student runs at inference.
 
 ## Pipeline
 
@@ -36,9 +35,6 @@ runs.
 | [`discod_pseudo_labels.tar.gz`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_pseudo_labels.tar.gz) | 11 MB | The 4,007 pseudo-masks used for distillation, with the manifest, the disagreement scores, and the filtered manifest at rho=5% |
 | [`discod_predictions.zip`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_predictions.zip) | 112 MB | PVTv2-B4 prediction maps on CAMO, COD10K and NC4K, with per-image metrics |
 
-The pseudo-label archive contains only the generated masks and metadata; the
-source images come from the public COD benchmarks (see [Data](#data)).
-
 ## Install
 
 ```bash
@@ -47,9 +43,8 @@ pip install -e .
 ```
 
 SAM2 is installed separately from <https://github.com/facebookresearch/sam2>
-(needed only for pseudo-label generation and teacher evaluation; student
-training and inference do not use it). Download the `sam2.1_hiera_large.pt`
-checkpoint and pass its path via `--sam2-pt`.
+and is needed only for pseudo-label generation. Download the
+`sam2.1_hiera_large.pt` checkpoint and pass its path via `--sam2-pt`.
 
 ## Data
 
@@ -61,9 +56,6 @@ data/cod/
 ├── TestDataset/{CAMO,CHAMELEON,COD10K}/{Imgs,GT}/
 └── NC4K/{Imgs,GT}/
 ```
-
-Only the unlabeled training images are used for pseudo-label generation;
-ground-truth masks are used exclusively for test-set evaluation.
 
 ## Run
 
