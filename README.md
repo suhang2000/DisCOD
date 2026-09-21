@@ -1,5 +1,7 @@
 # DisCOD: Disagreement-Guided Pseudo-Label Selection for Annotation-Free Camouflaged Object Detection
 
+Official implementation of the ACCV 2026 paper.
+
 DisCOD trains a lightweight real-time camouflaged object detector **without any
 pixel annotations**. A vision-language model (Qwen3-VL-4B) localizes the
 camouflaged object with a bounding box, SAM2 converts the box into a
@@ -23,6 +25,19 @@ runs.
 4. **Selection** — the 5% of samples with the highest `d_i` are dropped.
 5. **Distillation** — the PVTv2 student is trained on the filtered
    pseudo-labels with a boundary-weighted structure loss.
+
+## Download
+
+| Asset | Size | Content |
+|---|---|---|
+| [`discod_student_pvt_v2_b0.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b0.pth) | 14 MB | Student checkpoint, PVTv2-B0 (3.6M params) |
+| [`discod_student_pvt_v2_b2.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b2.pth) | 96 MB | Student checkpoint, PVTv2-B2 (25M params) |
+| [`discod_student_pvt_v2_b4.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b4.pth) | 238 MB | Student checkpoint, PVTv2-B4 (62M params) |
+| [`discod_pseudo_labels.tar.gz`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_pseudo_labels.tar.gz) | 11 MB | The 4,007 pseudo-masks used for distillation, with the manifest, the disagreement scores, and the filtered manifest at rho=5% |
+| [`discod_predictions.zip`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_predictions.zip) | 112 MB | PVTv2-B4 prediction maps on CAMO, COD10K and NC4K, with per-image metrics |
+
+The pseudo-label archive contains only the generated masks and metadata; the
+source images come from the public COD benchmarks (see [Data](#data)).
 
 ## Install
 
@@ -104,8 +119,15 @@ protocol (predictions resized back to ground-truth resolution).
 
 ## Citation
 
-The paper is under review; citation information will be added upon
-publication.
+```bibtex
+@inproceedings{li2026discod,
+  title     = {Disagreement-Guided Pseudo-Label Selection for Annotation-Free
+               Camouflaged Object Detection},
+  author    = {Li, Suhang and Yoshie, Osamu and Ieiri, Yuya},
+  booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
+  year      = {2026}
+}
+```
 
 ## License
 
