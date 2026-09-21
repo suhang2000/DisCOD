@@ -1,5 +1,7 @@
 # DisCOD: Disagreement-Guided Pseudo-Label Selection for Annotation-Free Camouflaged Object Detection
 
+Official implementation of the ACCV 2026 paper.
+
 DisCOD trains a lightweight real-time camouflaged object detector **without any
 pixel annotations**. A vision-language model (Qwen3-VL-4B) localizes the
 camouflaged object with a bounding box, SAM2 converts the box into a
@@ -8,8 +10,7 @@ The key ingredient is **cross-prompt box disagreement**: querying the VLM with
 K=5 prompts of distinct reasoning perspectives and measuring how much the
 returned boxes disagree identifies the object-level localization failures that
 dominate pseudo-label noise, so the worst samples can be removed before
-distillation — all without ground truth. At inference time only the student
-runs.
+distillation. Only the student runs at inference.
 
 ## Pipeline
 
@@ -24,6 +25,16 @@ runs.
 5. **Distillation** — the PVTv2 student is trained on the filtered
    pseudo-labels with a boundary-weighted structure loss.
 
+## Download
+
+| Asset | Size | Content |
+|---|---|---|
+| [`discod_student_pvt_v2_b0.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b0.pth) | 14 MB | Student checkpoint, PVTv2-B0 (3.6M params) |
+| [`discod_student_pvt_v2_b2.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b2.pth) | 96 MB | Student checkpoint, PVTv2-B2 (25M params) |
+| [`discod_student_pvt_v2_b4.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b4.pth) | 238 MB | Student checkpoint, PVTv2-B4 (62M params) |
+| [`discod_pseudo_labels.tar.gz`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_pseudo_labels.tar.gz) | 11 MB | The 4,007 pseudo-masks used for distillation, with the manifest, the disagreement scores, and the filtered manifest at rho=5% |
+| [`discod_predictions.zip`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_predictions.zip) | 112 MB | PVTv2-B4 prediction maps on CAMO, COD10K and NC4K, with per-image metrics |
+
 ## Install
 
 ```bash
@@ -32,13 +43,12 @@ pip install -e .
 ```
 
 SAM2 is installed separately from <https://github.com/facebookresearch/sam2>
-(needed only for pseudo-label generation and teacher evaluation; student
-training and inference do not use it). Download the `sam2.1_hiera_large.pt`
-checkpoint and pass its path via `--sam2-pt`.
+and is needed only for pseudo-label generation. Download the
+`sam2.1_hiera_large.pt` checkpoint and pass its path via `--sam2-pt`.
 
 ## Data
 
-Use the standard COD benchmark package (SINet layout):
+Use the standard COD benchmark package:
 
 ```
 data/cod/
@@ -46,9 +56,6 @@ data/cod/
 ├── TestDataset/{CAMO,CHAMELEON,COD10K}/{Imgs,GT}/
 └── NC4K/{Imgs,GT}/
 ```
-
-Only the unlabeled training images are used for pseudo-label generation;
-ground-truth masks are used exclusively for test-set evaluation.
 
 ## Run
 
@@ -104,8 +111,15 @@ protocol (predictions resized back to ground-truth resolution).
 
 ## Citation
 
-The paper is under review; citation information will be added upon
-publication.
+```bibtex
+@inproceedings{li2026discod,
+  title     = {Disagreement-Guided Pseudo-Label Selection for Annotation-Free
+               Camouflaged Object Detection},
+  author    = {Li, Suhang and Yoshie, Osamu and Ieiri, Yuya},
+  booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
+  year      = {2026}
+}
+```
 
 ## License
 
