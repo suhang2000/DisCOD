@@ -27,13 +27,13 @@ distillation. Only the student runs at inference.
 
 ## Download
 
-| Asset | Size | Content |
-|---|---|---|
-| [`discod_student_pvt_v2_b0.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b0.pth) | 14 MB | Student checkpoint, PVTv2-B0 (3.6M params) |
-| [`discod_student_pvt_v2_b2.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b2.pth) | 96 MB | Student checkpoint, PVTv2-B2 (25M params) |
-| [`discod_student_pvt_v2_b4.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b4.pth) | 238 MB | Student checkpoint, PVTv2-B4 (62M params) |
-| [`discod_pseudo_labels.tar.gz`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_pseudo_labels.tar.gz) | 11 MB | The 4,007 pseudo-masks used for distillation, with the manifest, the disagreement scores, and the filtered manifest at rho=5% |
-| [`discod_predictions.zip`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_predictions.zip) | 112 MB | PVTv2-B4 prediction maps on CAMO, COD10K and NC4K, with per-image metrics |
+| Asset | Content |
+|---|---|
+| [`discod_student_pvt_v2_b0.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b0.pth) | Student checkpoint, PVTv2-B0 (3.6M params) |
+| [`discod_student_pvt_v2_b2.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b2.pth) | Student checkpoint, PVTv2-B2 (25M params) |
+| [`discod_student_pvt_v2_b4.pth`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_student_pvt_v2_b4.pth) | Student checkpoint, PVTv2-B4 (62M params) |
+| [`discod_pseudo_labels.tar.gz`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_pseudo_labels.tar.gz) | The 4,007 pseudo-masks used for distillation, with the manifest, the disagreement scores, and the filtered manifest at rho=5% |
+| [`discod_predictions.zip`](https://github.com/suhang2000/DisCOD/releases/latest/download/discod_predictions.zip) | PVTv2-B4 prediction maps on CAMO, COD10K and NC4K, with per-image metrics |
 
 ## Install
 
